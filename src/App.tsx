@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+        <h1 className="text-3xl font-bold text-center mb-5">Task Manager</h1>
+        <div className="flex flex-col lg:flex-row w-full max-w-screen-xl gap-6">
+          {/* TaskForm on top for small screens, left for larger screens */}
+          <div className="flex-1 lg:w-1/2">
+            <TaskForm />
+          </div>
+          {/* TaskList on bottom for small screens, right for larger screens */}
+          <div className="flex-1 lg:w-1/2">
+            <TaskList />
+          </div>
+        </div>
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
